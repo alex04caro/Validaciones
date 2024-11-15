@@ -1,0 +1,13 @@
+package org.alejandrocaro.validaciones_final;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ValidacionesFinalApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
