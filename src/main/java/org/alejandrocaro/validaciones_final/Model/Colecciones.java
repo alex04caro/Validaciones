@@ -1,11 +1,9 @@
 package org.alejandrocaro.validaciones_final.Model;
 
-import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
+
 public class Colecciones {
     private static final Map<String,String> listaGeneros=new HashMap<>();
     static {
@@ -37,5 +35,18 @@ public class Colecciones {
         listaMusicas.put("N","New age");
         listaMusicas.put("P","Pop");
         listaMusicas.put("R","Rock");
+    }
+
+    public static Map<String, String> getListaGeneros() {
+        return listaGeneros;
+    }
+    public static Map<String, String> getListaAficiones() {
+        return listaAficiones;
+    }
+    public static Map<String, Pais> getListaPaises() {
+        return listaPaises;
+    }
+    public static Map<String, String> getListaMusicas() {
+        return listaMusicas;
     }
 }
