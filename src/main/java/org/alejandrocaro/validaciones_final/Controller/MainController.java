@@ -1,5 +1,6 @@
 package org.alejandrocaro.validaciones_final.Controller;
 
+import jakarta.validation.Valid;
 import org.alejandrocaro.validaciones_final.Model.Colecciones;
 import org.alejandrocaro.validaciones_final.Model.DatosFormulario;
 import org.alejandrocaro.validaciones_final.Model.DatosFormularioUtils;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.context.MessageSource;
 
@@ -42,9 +44,12 @@ public class MainController {
     }
 
     @GetMapping("recibe-parametros")
-    public String recibeParametrosYRepinta(@ModelAttribute DatosFormulario datosFormulario, Model modelo,
-                                           @RequestParam(name = "x", required = false) String coordenadaX,
-                                           @RequestParam(name = "y", required = false) String coordenadaY) {
+    public String recibeParametrosYRepinta(
+            @Valid @ModelAttribute DatosFormulario datosFormulario,
+            BindingResult bindingResult,
+            Model modelo,
+            @RequestParam(name = "x", required = false) String coordenadaX,
+            @RequestParam(name = "y", required = false) String coordenadaY) {
 
         iteraciones++;
         //Generemos un mensaje personalizado para que se muestre el numero de parametros recibidos y cuales son (sin tener en cuenta los nulos)
@@ -57,6 +62,13 @@ public class MainController {
         String mensajeCoordenadas = messageSource.getMessage("validaciones.coordenadas", new Object[]{coordenadaX, coordenadaY}, LocaleContextHolder.getLocale());
         modelo.addAttribute("mensajeCoordenadas",mensajeCoordenadas);
         modelo.addAttribute("metodo","repinta");
+
+        //Generamos textos que dependen de los errores de validacion
+        if(bindingResult.hasErrors()){
+            modelo.addAttribute("mensajeNOK","ALERTA: Formulario con errores");
+        }else {
+            modelo.addAttribute("mensajeOK","ALELUYA: Formulario sin errores");
+        }
 
         return "formulario";
     }
