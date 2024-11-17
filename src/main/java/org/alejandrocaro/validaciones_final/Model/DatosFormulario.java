@@ -1,12 +1,9 @@
 package org.alejandrocaro.validaciones_final.Model;
 
-import jakarta.validation.constraints.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 
@@ -28,5 +25,4 @@ public class DatosFormulario {
     private List<String> aficionesSeleccionadas;
     private String comentarios;
     private Boolean licencia;
-
 }

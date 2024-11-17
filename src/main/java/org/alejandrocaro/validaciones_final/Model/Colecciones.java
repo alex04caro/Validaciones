@@ -21,11 +21,11 @@ public class Colecciones {
     private static final Map<String,Pais> listaPaises =new HashMap<>();
     static {
 
-    listaPaises.put("es", new Pais("España", "Castellano", "34", true, "espania.jpg"));
-    listaPaises.put("fr", new Pais("Francia", "Francés", "33", false, "francia.jpg"));
-    listaPaises.put("it", new Pais("Italia", "Italiano", "39", false, "italia.jpg"));
-    listaPaises.put("pt", new Pais("Portugal", "Portugués", "351", false, "portugal.jpg"));
-    listaPaises.put("en", new Pais("Reino unido", "Inglés", "44", true, "reino_unido.jpg"));
+    listaPaises.put("es", new Pais("España", "Castellano", "34", true, "espania.png"));
+    listaPaises.put("fr", new Pais("Francia", "Francés", "33", false, "francia.png"));
+    listaPaises.put("it", new Pais("Italia", "Italiano", "39", false, "italia.png"));
+    listaPaises.put("pt", new Pais("Portugal", "Portugués", "351", false, "portugal.png"));
+    listaPaises.put("en", new Pais("Reino unido", "Inglés", "44", true, "reino_unido.png"));
 
     }
     private static final Map<String,String> listaMusicas =new HashMap<>();

@@ -1,109 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/verClave.js"></script>
+    <script src="/js/deseleccionarRadio.js"></script>
+    <script src="/js/modificarSelect.js"></script>
+    <script src="/js/modificarCheckbox.js"></script>
+    <script src="/js/vaciarFormulario.js"></script>
 </head>
 <body>
-    <h1>Formulario</h1>
-    <form action="/formulario/recibe-parametros" method="get" th:object="${datosFormulario}">
-        <label for="iteraciones" th:text="#{validaciones.iteraciones}+${iteraciones}"></label>
-        <input type="hidden" id="iteraciones" th:value="${iteraciones}">
+<h1>Formulario</h1>
+
+<label for="idiomaSeleccionado" th:text="#{validaciones.cambiarIdioma}"></label>
+<select id="idiomaSeleccionado" name="lang" onchange="cambiarIdioma()">
+    <option th:each="pais : ${listaPaises}" th:if="${pais.value.getMuestraIdioma()}" th:value="${pais.key}" th:text="${pais.value.getIdioma()}">
+</select>
+<br>
+<form action="/formulario/recibe-parametros" method="get" th:object="${datosFormulario}" id="formulario">
+    <label for="iteraciones" th:text="#{validaciones.iteraciones}+${iteraciones}"></label>
+    <input type="hidden" id="iteraciones" th:value="${iteraciones}">
+    <br>
+    <br>
+    <fieldset>
+        <legend th:text="#{validaciones.legend.datosUsuario}"></legend>
+        <label for="nombre" th:text="#{validaciones.nombre}"></label>
+        <input type="text" th:field="*{nombre}" th:placeholder="#{validaciones.nombre.placeholder}" tabindex="1">
         <br>
         <br>
-        <fieldset>
-            <legend th:text="#{validaciones.legend.datosUsuario}"></legend>
-            <label for="nombre" th:text="#{validaciones.nombre}"></label>
-            <input type="text" th:field="*{nombre}">
-            <br>
-            <br>
-            <label for="clave" th:text="#{validaciones.clave}"></label>
-            <input type="password" th:field="*{clave}">
-            <br>
-            <br>
-            <label for="confirmarClave" th:text="#{validaciones.confirmarClave}"></label>
-            <input type="password" th:field="*{confirmarClave}">
-            <br>
-            <br>
-        </fieldset>
-        <br>
-        <fieldset>
-            <legend th:text="#{validaciones.legend.datosPersonales}"></legend>
-            <label for="generoSeleccionado" th:text="#{validaciones.genero}"></label>
-            <br>
-            <input type="radio" th:each="genero : ${listaGeneros}" th:name="Genero" th:value="${genero.key}" th:text="${genero.value}" th:checked="${genero.key}==*{generoSeleccionado}">
-            <br>
-            <br>
-            <label for="fechaNacimiento" th:text="#{validaciones.fechaNacimiento}"></label>
-            <input type="text" th:field="*{fechaNacimiento}">
-            <br>
-            <br>
-            <label for="edad" th:text="#{validaciones.edad}"></label>
-            <input type="text" th:field="*{edad}">
-            <br>
-            <br>
-            <label for="pais" th:text="#{validaciones.pais}"></label>
-            <select th:field="*{paisSeleccionado}">
-                <option th:each="pais : ${listaPaises}" th:value="${pais.key}" th:text="${pais.value.getPais()}"></option>
-            </select>
-            <br>
-            <br>
-        </fieldset>
-        <br>
-        <fieldset>
-            <legend th:text="#{validaciones.legend.datosContacto}"></legend>
-            <label for="prefijoTelefonico" th:text="#{validaciones.prefijoTelefonicoPais}"></label>
-            <input type="text" th:field="*{prefijoTelefonico}">
-            <br>
-            <br>
-            <label for="telefono" th:text="#{validaciones.telefono}"></label>
-            <input type="text" th:field="*{telefono}">
-            <br>
-            <br>
-            <label for="email" th:text="#{validaciones.email}"></label>
-            <input type="text" th:field="*{email}">
-            <br>
-            <br>
-            <label for="url" th:text="#{validaciones.url}"></label>
-            <input type="text" th:field="*{url}">
-            <br>
-            <br>
-        </fieldset>
-        <br>
-        <fieldset>
-            <legend th:text="#{validaciones.legend.otraInformacion}"></legend>
-            <label for="archivos" th:text="#{validaciones.archivosSeleccionados}"></label>
-            <input type="file" th:field="*{archivos}">
-            <br>
-            <br>
-            <label for="musicasSeleccionadas" th:text="#{validaciones.musicasSeleccionadas}"></label>
-            <select multiple th:field="*{musicasSeleccionadas}">
-                <option th:each="musica : ${listaMusica}" th:value="${musica.key}" th:text="${musica.value}"></option>
-            </select>
-            <br>
-            <br>
-            <label for="aficionesSeleccionadas" th:text="#{validaciones.aficionesSeleccionadas}"></label>
-            <select multiple th:field="*{aficionesSeleccionadas}">
-                <option th:each="aficion : ${listaAficiones}" th:value="${aficion.key}" th:text="${aficion.value}"></option>
-            </select>
-            <br>
-            <br>
-        </fieldset>
+        <label for="clave" th:text="#{validaciones.clave}"></label>
+        <input type="password" th:field="*{clave}" th:placeholder="#{validaciones.clave.placeholder}" tabindex="2">
         <br>
         <br>
-        <fieldset>
-            <legend th:text="#{validaciones.legend.operacionesFormulario}"></legend>
-            <label for="licencia" th:text="#{validaciones.licencia}"></label>
-            <input type="checkbox" th:field="*{licencia}">
-            <br>
-            <br>
-            <input type="reset" th:value="#{validaciones.reset}">
-            <br>
-            <br>
-            <input type="submit" th:value="#{validaciones.submit}">
-            <br>
-            <input type="image" src="/img/arrow.webp" width="50" height="50">
-        </fieldset>
-    </form>
+        <label for="confirmarClave" th:text="#{validaciones.confirmarClave}"></label>
+        <input type="password" th:field="*{confirmarClave}" th:placeholder="#{validaciones.confirmarClave.placeholder}" tabindex="3">
+        <br>
+        <br>
+        <button type="button" onclick="verClave()" th:text="#{validaciones.boton.mostrarClave}"></button>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend th:text="#{validaciones.legend.datosPersonales}"></legend>
+        <label for="generoSeleccionado" th:text="#{validaciones.genero}"></label>
+        <br>
+        <input type="radio" th:each="genero : ${listaGeneros}" th:name="genero" th:value="${genero.key}" th:text="${genero.value}" th:checked="${genero.key}==*{generoSeleccionado}" tabindex="4">
+        <button type="button" onclick="deseleccionarRadiosPorName('genero')" th:text="#{validaciones.boton.deseleccionarGenero}"></button>
+        <br>
+        <br>
+        <label for="fechaNacimiento" th:text="#{validaciones.fechaNacimiento}"></label>
+        <input type="text" th:field="*{fechaNacimiento}" th:placeholder="#{validaciones.fechaNacimiento.placeholder}" tabindex="5">
+        <br>
+        <br>
+        <label for="edad" th:text="#{validaciones.edad}"></label>
+        <input type="text" th:field="*{edad}" th:placeholder="#{validaciones.edad.placeholder}" tabindex="6">
+        <br>
+        <br>
+        <label for="pais" th:text="#{validaciones.pais}"></label>
+        <select th:field="*{paisSeleccionado}" tabindex="7">
+            <option th:each="pais : ${listaPaises}" th:value="${pais.key}" th:text="${pais.value.getPais()}"></option>
+        </select>
+        <br>
+        <br>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend th:text="#{validaciones.legend.datosContacto}"></legend>
+
+        <label for="prefijoTelefonico" th:text="#{validaciones.prefijoTelefonicoPais}"></label>
+
+        <select th:field="*{prefijoTelefonico}" tabindex="8">
+            <option th:each="pais : ${listaPaises}" th:value="${pais.key}" th:selected="${pais.key}==*{prefijoTelefonico}">
+                <img th:src="@{/img/flags/{imagen}(imagen=${pais.value.getNombreArchivoBandera()})}">
+                <span th:text="'+'+${pais.value.getPrefijoTelefonicoPais()}"></span>
+            </option>
+        </select>
+        <br>
+        <br>
+
+        <label for="telefono" th:text="#{validaciones.telefono}"></label>
+        <input type="text" th:field="*{telefono}" th:placeholder="#{validaciones.telefono.placeholder}" tabindex="9">
+        <br>
+        <br>
+
+        <label for="email" th:text="#{validaciones.email}"></label>
+        <input type="text" th:field="*{email}" th:placeholder="#{validaciones.email.placeholder}" tabindex="10">
+        <br>
+        <br>
+
+        <label for="url" th:text="#{validaciones.url}"></label>
+        <input type="text" th:field="*{url}" th:placeholder="#{validaciones.url.placeholder}" tabindex="11">
+        <br>
+        <br>
+
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend th:text="#{validaciones.legend.otraInformacion}"></legend>
+        <label for="archivos" th:text="#{validaciones.archivosSeleccionados}"></label>
+        <input type="file" th:field="*{archivos}" tabindex="12">
+        <br>
+        <br>
+
+        <label for="musicasSeleccionadas" th:text="#{validaciones.musicasSeleccionadas}"></label>
+        <select multiple th:field="*{musicasSeleccionadas}" tabindex="13">
+            <option th:each="musica : ${listaMusica}" th:value="${musica.key}" th:text="${musica.value}"></option>
+        </select>
+        <button type="button" onclick="modificarSelect('musicasSeleccionadas',false)" th:text="#{validaciones.boton.deseleccionarMusicas}"></button>
+        <button type="button" onclick="modificarSelect('musicasSeleccionadas',true)" th:text="#{validaciones.boton.seleccionarMusicas}"></button>
+        <br>
+        <br>
+
+        <label for="aficionesSeleccionadas" th:text="#{validaciones.aficionesSeleccionadas}"></label>
+        <input type="checkbox" th:field="*{aficionesSeleccionadas}" th:each="aficion : ${listaAficiones}" th:value="${aficion.key}" th:text="${aficion.value}" tabindex="14">
+        <button type="button" onclick="modificarCheckbox('aficionesSeleccionadas',false)" th:text="#{validaciones.boton.deseleccionarAficiones}"></button>
+        <button type="button" onclick="modificarCheckbox('aficionesSeleccionadas',true)" th:text="#{validaciones.boton.seleccionarAficiones}"></button>
+
+        <br>
+        <br>
+
+        <label for="comentarios" th:text="#{validaciones.comentarios}"></label>
+        <textarea th:field="*{comentarios}" th:placeholder="#{validaciones.comentarios.placeholder}" tabindex="15"></textarea>
+        <br>
+        <br>
+
+    </fieldset>
+    <br>
+    <br>
+    <fieldset>
+        <legend th:text="#{validaciones.legend.operacionesFormulario}"></legend>
+        <label for="licencia" th:text="#{validaciones.licencia}"></label>
+        <input type="checkbox" th:field="*{licencia}" tabindex="16">
+        <br>
+        <br>
+
+        <input type="reset" th:value="#{validaciones.reset}" tabindex="17">
+        <br>
+        <br>
+        <button type="button" th:text="#{validaciones.boton.vaciarFormulario}" onclick="vaciarFormulario()" tabindex="18"></button>
+        <br>
+        <br>
+        <input type="submit" th:value="#{validaciones.submit}" tabindex="19">
+        <br>
+        <input type="image" src="/img/arrow.webp" width="50" height="50" tabindex="20">
+    </fieldset>
+</form>
+<br>
+<p th:if="${metodo == 'repinta'}" th:text="${mensajeConteoParametros}"></p>
+<p th:if="${metodo == 'repinta'}" th:text="${mensajeCoordenadas}"></p>
 </body>
 </html>
