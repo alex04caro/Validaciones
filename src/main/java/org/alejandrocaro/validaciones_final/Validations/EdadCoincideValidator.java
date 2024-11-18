@@ -22,6 +22,10 @@ public class EdadCoincideValidator implements ConstraintValidator<EdadCoincide, 
             return true; // No validamos si el objeto es null
         }
 
+        if(datosFormulario.getEdad()==null){
+            return true;
+        }
+
         LocalDate fechaNacimiento = datosFormulario.getFechaNacimiento();
         try {
             edad = datosFormulario.getEdad();

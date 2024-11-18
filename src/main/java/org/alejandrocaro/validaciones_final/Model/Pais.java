@@ -10,7 +10,5 @@ public class Pais {
     private String prefijoTelefonicoPais;
     private Boolean muestraIdioma;
     private String nombreArchivoBandera;
-
-
 }
 

@@ -18,7 +18,7 @@ public class DatosFormulario {
 
     @NotEmpty
     @NotNull
-    private String nombre;
+    private String nombre="Lola";
 
     @NotEmpty
     @NotNull
@@ -38,7 +38,7 @@ public class DatosFormulario {
     @NotNull
     @NotEmpty
     @ContenidoEnPaises
-    private String paisSeleccionado;
+    private String paisSeleccionado="pt";
 
     @NotNull
     @FormatoFecha
@@ -57,7 +57,7 @@ public class DatosFormulario {
 
     @NotNull
     @ContenidoEnPaises
-    private String prefijoTelefonico;
+    private String prefijoTelefonico="fr";
 
     @NotNull
     @Telefono
@@ -71,14 +71,14 @@ public class DatosFormulario {
     private String url;
 
     @NotNull
-    @Pattern(regexp = ".*\\\\.(pdf|jpg|jpeg|gif)$",message = "{validaciones.file.pattern}")
+    @Pattern(regexp = ".*\\.(pdf|jpg|jpeg|gif)$", message = "{validaciones.file.pattern}")
     private String archivos;
 
     @MusicaMinima(1)
-    private List<String> musicasSeleccionadas;
+    private List<String> musicasSeleccionadas=new ArrayList<>(Arrays.asList("F","R"));
 
     @AficionesMinima(2)
-    private List<String> aficionesSeleccionadas;
+    private List<String> aficionesSeleccionadas=new ArrayList<>(Arrays.asList("D","P","V"));
 
     @NotNull
     private String comentarios;

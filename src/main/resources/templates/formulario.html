@@ -16,10 +16,13 @@
 <body>
 <div th:replace="fragments/header.html"></div>
 <br>
-<h3 class="correcto" th:text="${mensajeOK}"></h3>
-<h3 class="error" th:text="${mensajeNOK}"></h3>
 
-<h1>Formulario</h1>
+<h3  class="error" th:text="${mensajeNOK}"></h3>
+<h3  class="correcto" th:text="${mensajeOK}"></h3>
+
+
+
+<h1 th:text="#{validaciones.titulo}"></h1>
 
 <label for="idiomaSeleccionado" th:text="#{validaciones.cambiarIdioma}"></label>
 <select id="idiomaSeleccionado" name="idiomaSeleccionado" onchange="cambiarIdioma()">
