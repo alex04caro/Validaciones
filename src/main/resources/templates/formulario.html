@@ -22,7 +22,8 @@
 <h1>Formulario</h1>
 
 <label for="idiomaSeleccionado" th:text="#{validaciones.cambiarIdioma}"></label>
-<select id="idiomaSeleccionado" name="lang" onchange="cambiarIdioma()">
+<select id="idiomaSeleccionado" name="idiomaSeleccionado" onchange="cambiarIdioma()">
+    <option value=""></option>
     <option th:each="pais : ${listaPaises}"
             th:if="${pais.value.getMuestraIdioma()}"
             th:value="${pais.key}"
@@ -32,7 +33,7 @@
 </select>
 <br>
 
-<form action="/formulario/recibe-parametros" method="get" th:object="${datosFormulario}" id="formulario">
+<form action="/formulario/recibe-parametros" method="post" th:object="${datosFormulario}" id="formulario">
     <label for="iteraciones" th:text="#{validaciones.iteraciones}+${iteraciones}"></label>
     <input type="hidden" id="iteraciones" th:value="${iteraciones}">
     <br>

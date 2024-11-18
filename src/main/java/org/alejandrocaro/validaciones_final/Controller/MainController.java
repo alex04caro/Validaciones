@@ -60,7 +60,7 @@ public class MainController {
         return "formulario";
     }
 
-    @GetMapping("recibe-parametros")
+    @PostMapping("recibe-parametros")
     public String recibeParametrosYRepinta(
             @Valid @ModelAttribute DatosFormulario datosFormulario,
             BindingResult bindingResult,
