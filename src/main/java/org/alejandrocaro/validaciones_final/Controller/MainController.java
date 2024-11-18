@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.context.MessageSource;
 
 
+
+
 @Controller
 @RequestMapping("/formulario")
 public class MainController {
@@ -65,7 +67,8 @@ public class MainController {
             HttpServletRequest request,
             Model modelo,
             @RequestParam(name = "x", required = false) String coordenadaX,
-            @RequestParam(name = "y", required = false) String coordenadaY) {
+            @RequestParam(name = "y", required = false) String coordenadaY,
+            @RequestParam(name = "lang",required = false)String lang){
 
         iteraciones++;
         //Generemos un mensaje personalizado para que se muestre el numero de parametros recibidos y cuales son (sin tener en cuenta los nulos)
@@ -101,6 +104,8 @@ public class MainController {
         modelo.addAttribute("nombreHost", nombreHost);
         modelo.addAttribute("idiomaYLocale", idiomaYLocale);
 
+        //añadimos el leguaje actual de la web
+        modelo.addAttribute("lang",lang);
         return "formulario";
     }
 

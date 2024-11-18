@@ -11,6 +11,7 @@
     <script src="/js/vaciarFormulario.js"></script>
     <script src="/js/confirmarEnvio.js"></script>
     <script src="/js/confirmarReseteo.js"></script>
+    <script src="/js/cambiarIdioma.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header.html"></div>
@@ -22,7 +23,12 @@
 
 <label for="idiomaSeleccionado" th:text="#{validaciones.cambiarIdioma}"></label>
 <select id="idiomaSeleccionado" name="lang" onchange="cambiarIdioma()">
-    <option th:each="pais : ${listaPaises}" th:if="${pais.value.getMuestraIdioma()}" th:value="${pais.key}" th:text="${pais.value.getIdioma()}">
+    <option th:each="pais : ${listaPaises}"
+            th:if="${pais.value.getMuestraIdioma()}"
+            th:value="${pais.key}"
+            th:text="${pais.value.getIdioma()}"
+            th:selected="${pais.key == lang}">
+    </option>
 </select>
 <br>
 

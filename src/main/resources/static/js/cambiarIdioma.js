@@ -1,6 +1,10 @@
-// Función que se llama cuando se cambia la opción en el select
 function cambiarIdioma() {
-    var idioma = document.getElementById("idiomaSelect").value;  // Obtener el valor seleccionado
-    // Redirigir al servidor con el idioma seleccionado como parámetro en la URL
-    window.location.href = '/cambiar-idioma?lang=' + idioma;
+    var idiomaSeleccionado = document.getElementById("idiomaSeleccionado").value;
+
+    // Construir la nueva URL con el parámetro lang
+    var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?lang=" + idiomaSeleccionado;
+
+    // Modifica la URL sin recargar la página
+    window.history.pushState({ path: newUrl }, '', newUrl);
+    window.location.replace(newUrl);
 }
