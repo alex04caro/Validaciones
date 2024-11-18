@@ -1,5 +1,6 @@
 package org.alejandrocaro.validaciones_final.Controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.alejandrocaro.validaciones_final.Model.Colecciones;
 import org.alejandrocaro.validaciones_final.Model.DatosFormulario;
@@ -36,10 +37,24 @@ public class MainController {
     }
 
     @GetMapping("devuelve-formulario")
-    public String devuelveFormulario(@ModelAttribute DatosFormulario datosFormulario, Model modelo) {
+    public String devuelveFormulario(@ModelAttribute DatosFormulario datosFormulario, Model modelo, HttpServletRequest request) {
 
         iteraciones++;
         modelo.addAttribute("metodo","devuelve");
+        //Cabeceras HTTP
+        String ipCliente = request.getRemoteAddr(); // Dirección IP del cliente
+        String navegador = request.getHeader("User-Agent"); // Navegador
+        String sistemaOperativo = System.getProperty("os.name"); // Sistema Operativo
+        String motorRenderizado = request.getHeader("Sec-Ch-Ua"); // Motor de renderización
+        String nombreHost = request.getRemoteHost(); // Nombre del host
+        String idiomaYLocale = request.getLocale().toString(); // Idioma y locale
+
+        modelo.addAttribute("ipCliente", ipCliente);
+        modelo.addAttribute("navegador", navegador);
+        modelo.addAttribute("sistemaOperativo", sistemaOperativo);
+        modelo.addAttribute("motorRenderizado", motorRenderizado);
+        modelo.addAttribute("nombreHost", nombreHost);
+        modelo.addAttribute("idiomaYLocale", idiomaYLocale);
         return "formulario";
     }
 
@@ -47,6 +62,7 @@ public class MainController {
     public String recibeParametrosYRepinta(
             @Valid @ModelAttribute DatosFormulario datosFormulario,
             BindingResult bindingResult,
+            HttpServletRequest request,
             Model modelo,
             @RequestParam(name = "x", required = false) String coordenadaX,
             @RequestParam(name = "y", required = false) String coordenadaY) {
@@ -69,6 +85,21 @@ public class MainController {
         }else {
             modelo.addAttribute("mensajeOK","ALELUYA: Formulario sin errores");
         }
+
+        //Cabeceras HTTP
+        String ipCliente = request.getRemoteAddr(); // Dirección IP del cliente
+        String navegador = request.getHeader("User-Agent"); // Navegador
+        String sistemaOperativo = System.getProperty("os.name"); // Sistema Operativo
+        String motorRenderizado = request.getHeader("Sec-Ch-Ua"); // Motor de renderización
+        String nombreHost = request.getRemoteHost(); // Nombre del host
+        String idiomaYLocale = request.getLocale().toString(); // Idioma y locale
+
+        modelo.addAttribute("ipCliente", ipCliente);
+        modelo.addAttribute("navegador", navegador);
+        modelo.addAttribute("sistemaOperativo", sistemaOperativo);
+        modelo.addAttribute("motorRenderizado", motorRenderizado);
+        modelo.addAttribute("nombreHost", nombreHost);
+        modelo.addAttribute("idiomaYLocale", idiomaYLocale);
 
         return "formulario";
     }

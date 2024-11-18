@@ -1,0 +1,31 @@
+<!-- src/main/resources/templates/fragments/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+    <style>
+        .header-section {
+            font-size: 14px; /* Letra pequeña */
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ccc;
+        }
+        .header-section span {
+            font-size: 16px; /* Texto de tamaño estándar para la vista */
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-section">
+    <span>Dirección IP del cliente HTTP: <span th:text="${ipCliente}">[dirección_ip]</span></span> |
+    <span>Navegador usado en el cliente HTTP: <span th:text="${navegador}">[marca_y_versión_del_navegador]</span></span> |
+    <span>Sistema operativo del equipo donde se ejecuta el navegador: <span th:text="${sistemaOperativo}">[sist_operat]</span></span> |
+    <span>Motor de renderización usado por el navegador: <span th:text="${motorRenderizado}">[motor_renderizado]</span></span> |
+    <span>Nombre de host solicitado por el cliente HTTP: <span th:text="${nombreHost}">[nombre_host]</span></span> |
+    <span>Idioma y locale preferidos por el cliente HTTP: <span th:text="${idiomaYLocale}">[idi_y_loc]</span></span>
+</div>
+
+</body>
+</html>

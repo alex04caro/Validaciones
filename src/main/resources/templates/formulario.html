@@ -9,8 +9,12 @@
     <script src="/js/modificarSelect.js"></script>
     <script src="/js/modificarCheckbox.js"></script>
     <script src="/js/vaciarFormulario.js"></script>
+    <script src="/js/confirmarEnvio.js"></script>
+    <script src="/js/confirmarReseteo.js"></script>
 </head>
 <body>
+<div th:replace="fragments/header.html"></div>
+<br>
 <h3 class="correcto" th:text="${mensajeOK}"></h3>
 <h3 class="error" th:text="${mensajeNOK}"></h3>
 
@@ -183,15 +187,15 @@
         <br>
         <br>
 
-        <input type="reset" th:value="#{validaciones.reset}" tabindex="17">
+        <input type="button" onclick="confirmaReseteo('formulario')" th:value="#{validaciones.reset}" tabindex="17">
         <br>
         <br>
         <button type="button" th:text="#{validaciones.boton.vaciarFormulario}" onclick="vaciarFormulario()" tabindex="18"></button>
         <br>
         <br>
-        <input type="submit" th:value="#{validaciones.submit}" tabindex="19">
+        <input type="button" onclick="confirmarEnvio('formulario')" th:value="#{validaciones.submit}" tabindex="19">
         <br>
-        <input type="image" src="/img/arrow.webp" width="50" height="50" tabindex="20">
+        <input type="image" onclick="confirmarEnvio('formulario')" src="/img/arrow.webp" width="50" height="50" tabindex="20">
     </fieldset>
 </form>
 <br>

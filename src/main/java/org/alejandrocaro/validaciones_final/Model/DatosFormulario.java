@@ -13,6 +13,7 @@ import java.util.*;
 
 @Iguales(first = "clave", second = "confirmarClave", message = "Las claves deben ser iguales")
 @EdadCoincide(message = "{validaciones.edad.coincideFechaNacimiento}")
+@ContactoRequerido
 public class DatosFormulario {
 
     @NotEmpty
@@ -59,8 +60,7 @@ public class DatosFormulario {
     private String prefijoTelefonico;
 
     @NotNull
-    @Max(value = 999999999,message = "{validaciones.telefono.digits}")
-    @Min(value = 100000000,message = "{validaciones.telefono.digits}")
+    @Telefono
     private String telefono;
 
     @NotNull
